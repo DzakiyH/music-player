@@ -74,7 +74,7 @@ export default {
             name: file.name,
             variant: 'bg-red-400',
             icon: 'fas fa-times',
-            text: 'text-red-400'
+            text: 'text-red-400V'
           })
           return
         }

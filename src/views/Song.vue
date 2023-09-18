@@ -134,20 +134,22 @@ export default {
       })
     }
   },
-  async created() {
-    const docSnapshot = await getDoc(doc(db, 'songs', this.$route.params.id))
+  async beforeRouteEnter(to, from, next) {
+    const docSnapshot = await getDoc(doc(db, 'songs', to.params.id))
 
-    if (!docSnapshot.exists()) {
-      this.$router.push({ name: 'home' })
-      return
-    }
+    next((vm) => {
+      if (!docSnapshot.exists()) {
+        vm.$router.push({ name: 'home' })
+        return
+      }
 
-    const { sort } = this.$route.query
+      const { sort } = vm.$route.query
 
-    this.sort = sort === '1' || sort === '2' ? sort : '1'
+      vm.sort = sort === '1' || sort === '2' ? sort : '1'
 
-    this.song = docSnapshot.data()
-    this.getComments()
+      vm.song = docSnapshot.data()
+      vm.getComments()
+    })
   },
   methods: {
     ...mapActions(usePlayerStore, ['newSong']),
