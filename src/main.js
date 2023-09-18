@@ -1,5 +1,6 @@
 import './assets/base.css'
 import './assets/main.css'
+import 'nprogress/nprogress.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -11,10 +12,13 @@ import { auth } from './includes/firebase'
 import i18n from './includes/i18n'
 import { registerSW } from 'virtual:pwa-register'
 import GlobalComponents from './includes/_globals'
+import progressBar from './includes/progress-bar'
 
 import Icon from './directives/icon'
 
 registerSW({ immediate: true })
+
+progressBar(router)
 
 let app
 
